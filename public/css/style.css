@@ -1,3 +1,8 @@
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
 body{
     font-family: "Plus Jakarta Sans", sans-serif !important;
     font-optical-sizing: auto !important;
@@ -8,8 +13,15 @@ body{
     min-height: 100vh;
 }
 
-.container{
+.content {
     flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.container{
+    flex: 1 0 auto;
+    max-width: 95%;
 }
     
 /* Navbar */
@@ -53,11 +65,22 @@ body{
 .f-info{
     text-align: center;
     display: flex;
+    height: 100%;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: space-evenly;
+}
+
+footer{
+    text-align: center;
+    display: flex;
     height: 8rem;
     background-color: #ebebeb;
     flex-wrap: wrap;
     justify-content: center;
     align-content: space-evenly;
+    flex-shrink: 0;
+    margin-top: auto;
 }
 
 /* Cards */
