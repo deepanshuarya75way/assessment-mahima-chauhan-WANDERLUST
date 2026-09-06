@@ -59,26 +59,6 @@ A full-stack travel listing platform inspired by Airbnb where users can explore 
 
 ---
 
-## 📸 Screenshots
-
-### Home Page
-
-(Add screenshot)
-
-### Listing Details
-
-(Add screenshot)
-
-### Interactive Map
-
-(Add screenshot)
-
-### User Authentication
-
-(Add screenshot)
-
----
-
 ## 📂 Project Structure
 
 WANDERLUST
@@ -105,9 +85,3 @@ WANDERLUST
 * Payment Integration
 
 ---
-
-## 👩‍💻 Author
-
-Mahima Chauhan
-
-GitHub: https://github.com/macnac-c
