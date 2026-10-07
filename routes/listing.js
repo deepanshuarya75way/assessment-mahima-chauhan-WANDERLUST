@@ -5,6 +5,7 @@ const {isLoggedIn, isOwner, validateListing}=require("../middleware.js");
 const multer  = require('multer')
 const {storage} = require("../cloudConfig.js");
 const upload = multer({ storage });
+const SaveQuery = require("../models/saveQuery.js");
 
 
 //requiring controllers
@@ -53,5 +54,11 @@ router.get("/:id/edit",
     isOwner, 
     wrapAsync(listingController.renderEditForm)
 );
+
+//Search listing route
+router.get("/search" ,
+    isLoggedIn ,
+    wrapAsync()
+)
 
 module.exports=router;

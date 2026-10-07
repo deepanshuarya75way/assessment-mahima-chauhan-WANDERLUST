@@ -4,6 +4,7 @@ const Listing=require("../models/listing.js");
 const mbxGeocoding = require('@mapbox/mapbox-sdk/services/geocoding');
 const mapToken = process.env.MAP_TOKEN;
 const geocodingClient = mbxGeocoding({ accessToken: mapToken });
+const SaveQuery = require("../models/saveQuery.js");
 
 
 
@@ -20,6 +21,13 @@ module.exports.renderNewForm = (req,res)=>{
 
 module.exports.showListing = async(req,res,next)=>{
     let {id}=req.params;
+
+    //extracting query
+    const {location} = req.query.location;
+    const allListings = await Listing.find({
+        location : location
+    });
+
     const listing=await Listing.findById(id)
     .populate({path : "reviews", populate:{
         path: "author"},
@@ -56,6 +64,14 @@ module.exports.createListing = async(req,res,next)=>{
     newListing.geometry=response.body.features[0].geometry;
 
     let savedListing = await newListing.save();
+
+    //check if saved query matches new listing
+    const checkSavedQuery = await SaveQuery.find({
+        notification : true
+    });
+
+    console.log(checkSavedQuery);
+
     console.log(savedListing);
 
     //flash message
@@ -101,6 +117,17 @@ module.exports.updateListing = async(req,res,next)=>{
 
     res.redirect(`/listings/${id}`);
 };
+
+module.exports.searchListig = async (req , res) => {
+    const query = req.query.q;
+
+    //find listing where location matches query
+    const listing = await Listing.find({
+        location : query
+    });
+
+    res.redirect(`/listings?location=${query}`);
+}
 
 
 module.exports.destroyListing = async(req,res,next)=>{
